@@ -1,16 +1,20 @@
 import React, { Component } from 'react'
-import { Header, Footer, Carousel, SideMenu,ProductColletion } from '../../components'
+import {  HeaderClass,Footer, Carousel, SideMenu,ProductColletion } from '../../components'
 import { Row, Col, Typography } from 'antd'
 import { productList1,productList2,productList3 } from './mockups'
 import sideImage from '../../assets/images/sider_2019_12-09.png'
 import sideImage2 from '../../assets/images/sider_2019_02-04.png'
 import sideImage3 from '../../assets/images/sider_2019_02-04-2.png'
 import styles from './HomePage.module.css'
-export  class HomePage extends Component {
+import { withTranslation, WithTranslation } from 'react-i18next'
+
+ class HomePageComponent extends Component<WithTranslation> {
   render() {
+    console.log(this.props.t)
+    const {t} = this.props
     return (
       <div>
-            <Header></Header>
+      <HeaderClass></HeaderClass>
       {/* 页面内容 content */}
       <div className={styles['page-content']}>
         <Row style={{ marginTop: 20 }}>
@@ -22,17 +26,17 @@ export  class HomePage extends Component {
           </Col>
         </Row>
         <ProductColletion
-        title={<Typography.Title level={3} type='warning'>爆款推荐</Typography.Title>}
+        title={<Typography.Title level={3} type='warning'>   {t("home_page.hot_recommended")}</Typography.Title>}
         sideImage={sideImage}
         products={productList1}
         ></ProductColletion>
          <ProductColletion
-        title={<Typography.Title level={3} type='warning'>新品上市</Typography.Title>}
+        title={<Typography.Title level={3} type='warning'>{t('home_page.new_arrival')}</Typography.Title>}
         sideImage={sideImage2}
         products={productList2}
         ></ProductColletion>
          <ProductColletion
-        title={<Typography.Title level={3} type='warning'>国内游推荐</Typography.Title>}
+        title={<Typography.Title level={3} type='warning'>{t('home_page.domestic_travel')}</Typography.Title>}
         sideImage={sideImage3}
         products={productList3}
         ></ProductColletion>
@@ -42,3 +46,5 @@ export  class HomePage extends Component {
     )
   }
 }
+ 
+export const HomePage = withTranslation()(HomePageComponent)
